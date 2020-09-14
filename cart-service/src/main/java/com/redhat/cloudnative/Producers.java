@@ -63,5 +63,33 @@ public class Producers {
 
     // TODO add getConfigBuilder
 
+        @Produces
+    RemoteCache<String, ShoppingCart> getCache() throws IOException {
+
+        RemoteCacheManager manager = new RemoteCacheManager(getConfigBuilder().build());
+
+        SerializationContext serCtx = ProtoStreamMarshaller.getSerializationContext(manager);
+        FileDescriptorSource fds = new FileDescriptorSource();
+        fds.addProtoFiles("META-INF/cart.proto");
+        serCtx.registerProtoFiles(fds);
+        serCtx.registerMarshaller(new ShoppingCartMarshaller());
+        serCtx.registerMarshaller(new ShoppingCartItemMarshaller());
+        serCtx.registerMarshaller(new ProductMarshaller());
+        serCtx.registerMarshaller(new PromotionMarhsaller());
+        return manager.getCache();
+    }
+
+    protected ConfigurationBuilder getConfigBuilder() {
+        ConfigurationBuilder cfg = null;
+        cfg = new ConfigurationBuilder().addServer()
+                .host(dgHost)
+                .port(dgPort)
+                .marshaller(new ProtoStreamMarshaller())
+                .clientIntelligence(ClientIntelligence.BASIC);
+
+        return cfg;
+
+    }
+
 
 }

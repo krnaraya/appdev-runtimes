@@ -16,7 +16,7 @@ import javax.ws.rs.ext.Provider;
 
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
-@Path("/api/inventory")
+@Path("/services/inventory")
 @ApplicationScoped
 @Produces("application/json")
 @Consumes("application/json")
@@ -28,7 +28,7 @@ public class InventoryResource {
     }
 
     @GET
-    @Path("{itemId}")
+    @Path("/{itemId}")
     public List<Inventory> getAvailability(@PathParam String itemId) {
         return Inventory.<Inventory>streamAll()
         .filter(p -> p.itemId.equals(itemId))

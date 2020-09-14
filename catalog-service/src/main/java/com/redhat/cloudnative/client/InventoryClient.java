@@ -13,32 +13,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import feign.hystrix.FallbackFactory;
 
+
 @FeignClient(name="inventory",fallbackFactory = InventoryClient.InventoryClientFallbackFactory.class)
 public interface InventoryClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/api/inventory/{itemId}", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method = RequestMethod.GET, value = "/services/inventory/{itemId}", consumes = {MediaType.APPLICATION_JSON_VALUE})
     String getInventoryStatus(@PathVariable("itemId") String itemId);
 
-//TODO: Add Fallback factory here
     @Component
-    static class InventoryClientFallbackFactory implements FallbackFactory<InventoryClient> {
+    class InventoryClientFallbackFactory implements FallbackFactory<InventoryClient> {
         @Override
         public InventoryClient create(Throwable cause) {
-            return new InventoryClient() {
-                @Override
-                public String getInventoryStatus(@PathVariable("itemId") String itemId) {
-                    JSONObject obj = new JSONObject();
-                    obj.put("quantity", 0);
-                    obj.put("itemId", itemId);
-                    obj.put("location", "unknown");
-                    obj.put("link", "http://redhat.com");
-                    JSONArray inv = new JSONArray();
-                    inv.put(obj);
-                    System.out.println("returning inv: " + inv.toString());
-                    return inv.toString();
-
-                }
-            };
+            return itemId -> "[{'quantity':-1}]";
         }
     }
 }

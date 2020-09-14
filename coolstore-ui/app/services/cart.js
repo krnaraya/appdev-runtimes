@@ -5,10 +5,10 @@ angular.module("app")
 .factory('cart', ['$http', '$q', 'COOLSTORE_CONFIG', 'Auth', '$location', function($http, $q, COOLSTORE_CONFIG, $auth, $location) {
 	var factory = {}, cart, products, cartId, baseUrl;
 
- 	baseUrl = $location.protocol() + '://cart-' + COOLSTORE_CONFIG.OCP_NAMESPACE + '.' + $location.host().replace(/^.*?\.(.*)/g,"$1") + '/api/cart';
+ 	//baseUrl = $location.protocol() + '://cart-service' + COOLSTORE_CONFIG.OCP_NAMESPACE + '.' + $location.host().replace(/^.*?\.(.*)/g,"$1") + '/api/cart';
 	// Following used for local testing
  	// baseUrl = 'http://localhost:8081/api/cart';
-
+    baseUrl = 'http://cart-service-runtimes-demo.apps.cluster-mel-c023.mel-c023.sandbox900.opentlc.com/api/cart'
 
 	factory.checkout_withBilling = function(ccinfo){
 		var deferred = $q.defer();

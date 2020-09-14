@@ -33,6 +33,13 @@ public class CartResource {
     ShoppingCartService shoppingCartService;
 
     // TODO ADD getCart method
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/{cartId}")
+    @Operation(summary = "get the contents of cart by cartId")
+    public ShoppingCart getCart(@PathParam("cartId") String cartId) {
+        return shoppingCartService.getShoppingCart(cartId);
+    }
 
 
     @POST
