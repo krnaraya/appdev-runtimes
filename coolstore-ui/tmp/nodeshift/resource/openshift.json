@@ -16,7 +16,7 @@
         },
         "annotations": {
           "nodeshift/git-branch": "master",
-          "nodeshift/git-commit": "a47b7c5f84fba44676c10814383e98f49b9560c0"
+          "nodeshift/git-commit": "1549586715a49b0ff32d536345974321b0b264e6"
         }
       },
       "spec": {
@@ -56,7 +56,7 @@
             },
             "annotations": {
               "nodeshift/git-branch": "master",
-              "nodeshift/git-commit": "a47b7c5f84fba44676c10814383e98f49b9560c0"
+              "nodeshift/git-commit": "1549586715a49b0ff32d536345974321b0b264e6"
             }
           },
           "spec": {
@@ -109,7 +109,7 @@
         },
         "annotations": {
           "nodeshift/git-branch": "master",
-          "nodeshift/git-commit": "a47b7c5f84fba44676c10814383e98f49b9560c0"
+          "nodeshift/git-commit": "1549586715a49b0ff32d536345974321b0b264e6"
         }
       }
     }
